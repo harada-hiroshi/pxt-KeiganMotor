@@ -60,6 +60,7 @@ namespace keiganmotor {
     const CMD_ACT_STOP = 0x6D
     const CMD_ACT_MOVE_TO_POSITION = 0x66
     const CMD_ACT_MOVE_BY_DISTANCE = 0x68
+    const CMD_ACT_PRESET_POSITION = 0x5A
 
     const CMD_ACT_PREPARE_PLAYBACK_MOTION = 0x86
     const CMD_ACT_START_PLAYBACK_MOTION_FROM_PREP = 0x87
@@ -136,7 +137,7 @@ namespace keiganmotor {
 
         name: string
         nameBuffer: Buffer
-        serialNumber: number
+        serialNumber: number;
 
         group: number
 
@@ -392,6 +393,21 @@ namespace keiganmotor {
         //% parts="KeiganMotor"
         moveByDeg(distance: number) {
             this.moveBy(DEGREE_TO_RADIAN * distance)
+        }
+
+        /**
+         * Preset Position [radian]
+         * @param position [radian]
+         */
+        presetPosition(position: number) {
+            this.writeFloat32(CMD_ACT_MOVE_TO_POSITION, position)
+        }
+        /**
+         * Preset Position [degree]
+         * @param position [degree]
+         */
+        presetPositionDeg(position: number) {
+            this.presetPosition(DEGREE_TO_RADIAN * position)
         }
 
         /**
