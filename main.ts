@@ -400,7 +400,7 @@ namespace keiganmotor {
          * @param position [radian]
          */
         presetPosition(position: number) {
-            this.writeFloat32(CMD_ACT_MOVE_TO_POSITION, position)
+            this.writeFloat32(CMD_ACT_PRESET_POSITION, position)
         }
         /**
          * Preset Position [degree]
